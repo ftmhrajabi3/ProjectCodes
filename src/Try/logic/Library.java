@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class Library {
-	private Library library;
+	private static Library library;
 	private HashSet<Song> songs = new HashSet<Song>();
 	
 	private Library() {
@@ -12,7 +12,7 @@ public class Library {
 	}
 
 
-	public Library getLibrary() {
+	public static Library getLibrary() {
 		if(library == null)
 			library = new Library();			
 		return library;
