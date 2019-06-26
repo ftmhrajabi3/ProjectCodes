@@ -1,4 +1,4 @@
-package Try;
+package Try.UI.South;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,8 +31,6 @@ public class SouthPanel extends JPanel {
 	JSlider volum = new JSlider();
 	
 	JPanel panel = new JPanel();
-	
-	Playbtn playbtn = new Playbtn("C:\\Users\\Fatemeh Rajabi\\Music\\Masih.mp3");
 	
 	public SouthPanel() {
 		setBounds(0, 534, 1148, 124);
