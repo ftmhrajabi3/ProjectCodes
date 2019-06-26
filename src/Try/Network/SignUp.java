@@ -2,18 +2,24 @@ package Try.Network;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import Try.logic.User;
+import Try.UI.Main;
 
 
-public class SignUp {
+public class SignUp implements ActionListener {
 
 	JFrame frame = new JFrame("Login");
 	ImageIcon image = new ImageIcon("D:\\Java Codes\\Project\\Spotify.jpg");
@@ -47,7 +53,7 @@ public class SignUp {
 	    
 	    
 	    signUpButton.setBounds(100, 260, 100, 30);
-	    
+	    signUpButton.addActionListener(this);
 	    
 		frame.setIconImage(image.getImage());
 		frame.setBounds(600, 200, 300, 400);
@@ -62,5 +68,39 @@ public class SignUp {
 	    frame.setVisible(true);
 	    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		new Server().start();
+		if(notExists()) {
+			frame.setVisible(false);
+		}else {
+			JOptionPane.showMessageDialog(new JFrame(), "This Email Already Exists");
+		}
+		
+	}
+	
+	private boolean notExists() {
+		boolean check = false;
+		try (Socket socket = new Socket("127.0.0.1", 444);
+				DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+				DataInputStream dis = new DataInputStream(socket.getInputStream())){
+			
+			dos.writeUTF("user sign up");
+			dos.flush();
+			dos.writeUTF(name.getText());
+			dos.flush();
+			dos.writeUTF(email.getText());
+			dos.flush();
+			dos.writeUTF(password.getText());
+			dos.flush();
+			check = dis.readBoolean();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return check;
 	}
 }

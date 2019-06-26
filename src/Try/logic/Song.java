@@ -1,6 +1,7 @@
 package Try.logic;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import main.ID3v1;
 import main.ID3v2;
@@ -8,7 +9,7 @@ import main.InvalidDataException;
 import main.Mp3File;
 import main.UnsupportedTagException;
 
-public class Song {
+public class Song implements Serializable {
 	
 	private String title;
 	private String artist;

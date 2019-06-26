@@ -1,9 +1,10 @@
 package Try.logic;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class Playlist {
+public class Playlist implements Serializable {
 	protected boolean deletable;
 	
 	protected HashSet<Song> songs = new HashSet<Song>();

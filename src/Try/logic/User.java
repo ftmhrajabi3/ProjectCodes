@@ -1,12 +1,22 @@
 package Try.logic;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class User {
+public class User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String email;
 	private String password;
+	private Library library = Library.getLibrary();
 	private HashSet<Playlist> playlists = new HashSet<Playlist>();
 	private HashSet<User> friends = new HashSet<User>();
 	private HashSet<User> requests = new HashSet<User>();
@@ -17,6 +27,7 @@ public class User {
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		updateInfo(this);
 	}
 
 
@@ -49,11 +60,13 @@ public class User {
 	
 	public void addPlaylist(Playlist playlist) {
 		playlists.add(playlist);
+		updateInfo(this);
 	}
 	
 	
 	public void removePlaylist(Playlist playlist) {
 		playlists.remove(playlist);
+		updateInfo(this);
 	}
 	
 	
@@ -63,7 +76,9 @@ public class User {
 	
 	
 	public void  acceptRequestOf(User u) {
-		
+		requests.remove(u);
+		friends.add(u);
+		updateInfo(this);
 	}
 	
 	
@@ -78,4 +93,18 @@ public class User {
         return allRequests;
 	}
 	
+	public void updateInfo(User u) {
+		
+		try(FileOutputStream fout = new FileOutputStream("D:\\Jpotify\\SampelCode\\Server\\" + email + ".txt");
+				ObjectOutputStream out = new ObjectOutputStream(fout);) {
+			out.writeObject(u);
+			out.flush();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		  
+		  
+	}
 }

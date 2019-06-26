@@ -4,16 +4,21 @@ package Try.Network;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Try.UI.Main;
-import Try.logic.User;
 
 
 public class Login implements ActionListener {
@@ -75,19 +80,48 @@ public class Login implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login login = new Login();
+					new Login();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		});	
+		});
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		frame.setVisible(false);
-		Main frame = new Main();
-		frame.setVisible(true);
-		
+		new Server().start();
+		if(checkUserInfo()) {
+			frame.setVisible(false);
+			Main frame = new Main();
+			frame.setVisible(true);
+		}
+		else {
+			JOptionPane.showMessageDialog(new JFrame(), "Wrong email or password");
+		}
+	}
+	
+	
+	private boolean checkUserInfo() {
+		boolean check = false;
+		try (Socket socket = new Socket("127.0.0.1", 444);
+				DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+				DataInputStream dis = new DataInputStream(socket.getInputStream())){
+			
+			dos.writeUTF("check User Info");
+			dos.flush();
+			dos.writeUTF(email.getText());
+			dos.flush();
+			dos.writeUTF(password.getText());
+			dos.flush();
+			check = dis.readBoolean();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return check;
 	}
 }
