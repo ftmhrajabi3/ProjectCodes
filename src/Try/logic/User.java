@@ -16,9 +16,9 @@ public class User implements Serializable {
 	private String name;
 	private String email;
 	private String password;
-	private Library library = new Library();
+	private Library library = new Library(this);
 	private HashSet<Playlist> playlists = new HashSet<Playlist>();
-	private SharedPlayList share = new SharedPlayList(null, "Shared Playlist");
+	private SharedPlayList share = new SharedPlayList(null, "Shared Playlist", this);
 	private HashSet<User> friends = new HashSet<User>();
 	private HashSet<User> requests = new HashSet<User>();
 	
@@ -109,6 +109,8 @@ public class User implements Serializable {
 		
 		try(FileOutputStream fout = new FileOutputStream("D:\\Jpotify\\SampelCode\\Client\\" + email + ".txt");
 				ObjectOutputStream out = new ObjectOutputStream(fout);) {
+			if(out == null)
+				System.out.println("out null");
 			out.writeObject(this);
 			out.flush();
 		} catch (FileNotFoundException e) {

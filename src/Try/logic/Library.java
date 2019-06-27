@@ -10,13 +10,23 @@ public class Library implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private HashSet<Song> songs = new HashSet<Song>();
+	private User user;
 	
+	
+	
+	public Library(User user) {
+		super();
+		this.user = user;
+	}
+
 	public void addSong(Song s) {
 		songs.add(s);
+		user.updateInfo();
 	}
 	
 	public void removeSong(Song s) {
 		songs.remove(s);
+		user.updateInfo();
 	}
 	
 	public Song[] getLibrarySongs() {

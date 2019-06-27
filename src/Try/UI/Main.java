@@ -1,5 +1,8 @@
 package Try.UI;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -74,7 +77,16 @@ public class Main extends JFrame {
 		menuBar.add(addMenu);
 		
 		addMenu.add(addSong);
+		addSong.addActionListener(new AddSong(this, user));
 		addMenu.add(addPlaylist);
+		addPlaylist.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new AddPlaylist(user);
+				
+			}
+		});
 	
 		menuBar.add(userMenu);
 		

@@ -21,6 +21,7 @@ public class NorthPanel extends JPanel {
 	JTextField txtSongSearch = new JTextField();
 	JLabel lblSearch = new JLabel("Search");
 	JButton btnSearch = new JButton("Search");
+	SearchButton searchBtn;
 
 	public NorthPanel(User user) {
 		
@@ -38,6 +39,8 @@ public class NorthPanel extends JPanel {
 		txtSongSearch.setColumns(10);
 		
 		btnSearch.setBounds(599, 5, 80, 21);
+		searchBtn = new SearchButton(this, user);
+		btnSearch.addActionListener(searchBtn);
 		add(btnSearch);
 		
 	}

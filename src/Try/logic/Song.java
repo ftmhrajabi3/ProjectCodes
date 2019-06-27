@@ -1,6 +1,8 @@
 package Try.logic;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.io.Serializable;
 
 import main.ID3v1;
@@ -26,6 +28,8 @@ public class Song implements Serializable {
 
 	private byte[] albumImageData;
 	
+	private String mimeType;
+	
 	public Song(String path) {
 		super();
 		this.path = path;
@@ -41,9 +45,9 @@ public class Song implements Serializable {
 		}
 		if (mp3file.hasId3v1Tag()) {
 		  ID3v1 id3v1Tag = mp3file.getId3v1Tag();
-		  System.out.println("Artist: " + id3v1Tag.getArtist());
-		  System.out.println("Title: " + id3v1Tag.getTitle());
-		  System.out.println("Album: " + id3v1Tag.getAlbum());
+		  artist =  id3v1Tag.getArtist();
+		  title = id3v1Tag.getTitle();
+		  album = id3v1Tag.getAlbum();
 
 		}
 		else if (mp3file.hasId3v2Tag()) {
@@ -52,13 +56,30 @@ public class Song implements Serializable {
 			  title = id3v2Tag.getTitle();
 			  album = id3v2Tag.getAlbum();
 			  albumImageData = id3v2Tag.getAlbumImage();
+			  mimeType = id3v2Tag.getAlbumImageMimeType();
+			  getAlbumImageData();
 			}
 
 	
 	}
 	
-	public byte[] getAlbumImageData() {
-		return albumImageData;
+	public void getAlbumImageData() {
+		try {
+			if (mp3file.hasId3v2Tag()) {
+				if (albumImageData != null) {
+					File file = new File("D:\\Jpotify\\SampelCode\\SongPic\\" + title + ".jpeg");
+					if(!file.exists()) {
+						file.createNewFile();
+						RandomAccessFile randomfile = new RandomAccessFile(file, "rw");
+						randomfile.write(albumImageData);
+						randomfile.close();						
+					}
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public long getLastListened() {

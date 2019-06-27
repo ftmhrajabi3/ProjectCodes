@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import Try.UI.Center.CentralPanel;
+import Try.UI.Center.SongUI;
 import Try.logic.Song;
 import Try.logic.User;
 
@@ -26,9 +28,13 @@ public class SearchButton implements ActionListener {
 		if(song == null)
 			JOptionPane.showMessageDialog(new JFrame(), "Not found");
 		else {
-			
+			JFrame centralPanel = new JFrame();
+			centralPanel.setUndecorated(true);
+			centralPanel.setBounds(150, 34, 832, 34);
+			centralPanel.setVisible(true);
+			SongUI songUI = new SongUI(song);
+			centralPanel.add(songUI);
 		}
-		
 	}
 	
 	public Song findSong() {

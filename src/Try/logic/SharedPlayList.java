@@ -10,8 +10,8 @@ public class SharedPlayList extends Playlist implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public SharedPlayList(HashSet<Song> songs, String name) {
-		super(false, songs, name);
+	public SharedPlayList(HashSet<Song> songs, String name, User user) {
+		super(false, songs, "Shared Playlist", user);
 	}
 	
 }
