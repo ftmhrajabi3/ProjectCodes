@@ -18,10 +18,9 @@ public class Playlist implements Serializable {
 	
 	protected User user;
 	
-	public Playlist(boolean deletable, HashSet<Song> songs, String name, User user) {
+	public Playlist(boolean deletable, String name, User user) {
 		super();
 		this.deletable = deletable;
-		this.songs = songs;
 		this.name = name;
 		this.user = user;
 		user.updateInfo();

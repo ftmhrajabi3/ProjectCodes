@@ -39,6 +39,10 @@ public class ServerSignUpCheck {
 			out.writeObject(user);
 			out.flush();
 			out.close();
+			file = new File("D:\\Jpotify\\SampelCode\\Server\\" + email + "requsts.txt");
+			file.createNewFile();
+			file = new File("D:\\Jpotify\\SampelCode\\Server\\shared" + email);
+			file.mkdir();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

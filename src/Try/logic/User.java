@@ -1,5 +1,6 @@
 package Try.logic;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class User implements Serializable {
 	private String password;
 	private Library library;
 	private HashSet<Playlist> playlists = new HashSet<Playlist>();
-	private SharedPlayList share = new SharedPlayList(null, "Shared Playlist", this);
+	private SharedPlayList share = new SharedPlayList("Shared Playlist", this);
 	private HashSet<User> friends = new HashSet<User>();
 	private HashSet<User> requests = new HashSet<User>();
 	
@@ -107,6 +108,14 @@ public class User implements Serializable {
 	}
 	
 	public void updateInfo() {
+		File file = new File("D:\\Jpotify\\SampelCode\\Client\\" + email + ".txt");
+		file.delete();
+		try {
+			file.createNewFile();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		try(FileOutputStream fout = new FileOutputStream("D:\\Jpotify\\SampelCode\\Client\\" + email + ".txt");
 				ObjectOutputStream out = new ObjectOutputStream(fout);) {
 			out.writeObject(this);

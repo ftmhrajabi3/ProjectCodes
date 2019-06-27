@@ -2,6 +2,8 @@ package Try.UI;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 
@@ -10,16 +12,10 @@ import Try.logic.Song;
 import Try.logic.User;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
-import java.awt.Rectangle;
-import javax.swing.JList;
 
 public class AddPlaylist implements ActionListener {
 
@@ -28,8 +24,8 @@ public class AddPlaylist implements ActionListener {
 	JLabel lblName = new JLabel("Name:");
 	JButton btnCreate = new JButton("Create");
 	User user;
-	JPanel panel = new JPanel();
-	JScrollPane scrollpane = new JScrollPane(panel);
+	JTextField textField_1 = new JTextField();;
+	Playlist playlist;
 	/**
 	 * Launch the application.
 	 */
@@ -59,30 +55,44 @@ public class AddPlaylist implements ActionListener {
 		textField.setBounds(144, 30, 278, 21);
 		frmAddPlaylist.getContentPane().add(textField);
 		textField.setColumns(10);
-		btnCreate.setBounds(353, 424, 85, 21);
+		btnCreate.setBounds(353, 77, 85, 21);
 		btnCreate.addActionListener(this);
 		frmAddPlaylist.getContentPane().add(btnCreate);
-		showSongs();
 		
-		panel.setBounds(new Rectangle(42, 59, 378, 310));
-		panel.setLayout(null);
-		scrollpane.setBounds(0, 0, 380, 312);
-		frmAddPlaylist.getContentPane().add(scrollpane);
+		JLabel lblSongsName = new JLabel("Song's Name");
+		lblSongsName.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblSongsName.setBounds(32, 116, 95, 21);
+		frmAddPlaylist.getContentPane().add(lblSongsName);
+		
+		textField_1.setBounds(144, 118, 278, 19);
+		frmAddPlaylist.getContentPane().add(textField_1);
+		textField_1.setColumns(10);
+		
+		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Song[] songs = user.getLibrary().getLibrarySongs();
+				int i;
+				for(i=0 ; i<songs.length ; i++) {
+					if(songs[i].getTitle().equalsIgnoreCase(textField_1.getText())) {
+						if(playlist != null) {
+							playlist.addSong(songs[i]);
+							break;
+						}
+					}	
+				}
+				if(i >= songs.length)
+					JOptionPane.showMessageDialog(new JFrame(), "Song Not Found");
+			}
+		});
+		btnAdd.setBounds(353, 161, 85, 21);
+		frmAddPlaylist.getContentPane().add(btnAdd);
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		user.addPlaylist(new Playlist(true, null, textField.getText(), user));
-		
-	}
-	
-	public void showSongs() {
-		Song[] songs = user.getLibrary().getLibrarySongs();
-		JCheckBox[] checkBoxs = new JCheckBox[songs.length];
-		for(int i=0 ; i<songs.length ; i++) {
-			checkBoxs[i] = new JCheckBox(songs[i].getTitle());
-			panel.add(checkBoxs[i]);
-			checkBoxs[i].setBounds(6, i + 40, 100, 30);
-		}
+		playlist = new Playlist(true, textField.getText(), user);
+		user.addPlaylist(playlist);
 	}
 }
