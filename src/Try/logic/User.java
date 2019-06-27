@@ -16,7 +16,7 @@ public class User implements Serializable {
 	private String name;
 	private String email;
 	private String password;
-	private Library library = new Library(this);
+	private Library library;
 	private HashSet<Playlist> playlists = new HashSet<Playlist>();
 	private SharedPlayList share = new SharedPlayList(null, "Shared Playlist", this);
 	private HashSet<User> friends = new HashSet<User>();
@@ -28,6 +28,7 @@ public class User implements Serializable {
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		library = new Library(this);
 		updateInfo();
 	}
 
@@ -106,11 +107,8 @@ public class User implements Serializable {
 	}
 	
 	public void updateInfo() {
-		
 		try(FileOutputStream fout = new FileOutputStream("D:\\Jpotify\\SampelCode\\Client\\" + email + ".txt");
 				ObjectOutputStream out = new ObjectOutputStream(fout);) {
-			if(out == null)
-				System.out.println("out null");
 			out.writeObject(this);
 			out.flush();
 		} catch (FileNotFoundException e) {
@@ -121,4 +119,14 @@ public class User implements Serializable {
 		  
 		  
 	}
+
+
+	@Override
+	public String toString() {
+		return "User [name=" + name + ", email=" + email + ", password=" + password + ", library=" + library
+				+ ", playlists=" + playlists + ", share=" + share + ", friends=" + friends + ", requests=" + requests
+				+ "]";
+	}
+	
+	
 }

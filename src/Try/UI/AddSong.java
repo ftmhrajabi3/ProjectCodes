@@ -30,6 +30,7 @@ public class AddSong implements ActionListener {
 		FileFilter filter = new FileNameExtensionFilter("MP3 File", "mp3");
 		filechooser.setFileFilter(filter);
 		if(i == JFileChooser.APPROVE_OPTION) {
+			System.out.println(user.toString());
 			user.getLibrary().addSong(new Song(filechooser.getSelectedFile().getPath()));
 		}
 	}

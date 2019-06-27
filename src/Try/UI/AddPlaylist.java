@@ -62,12 +62,11 @@ public class AddPlaylist implements ActionListener {
 		btnCreate.setBounds(353, 424, 85, 21);
 		btnCreate.addActionListener(this);
 		frmAddPlaylist.getContentPane().add(btnCreate);
-		
-		panel.setBounds(new Rectangle(0, 0, 100, 100));
-		panel.setLayout(null);
 		showSongs();
 		
-		scrollpane.setBounds(42, 75, 380, 312);
+		panel.setBounds(new Rectangle(42, 59, 378, 310));
+		panel.setLayout(null);
+		scrollpane.setBounds(0, 0, 380, 312);
 		frmAddPlaylist.getContentPane().add(scrollpane);
 	}
 

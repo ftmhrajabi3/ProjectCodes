@@ -24,7 +24,7 @@ public class Song implements Serializable {
 	
 	private long lastListened;
 	
-	private Mp3File mp3file;
+	private transient Mp3File mp3file;
 
 	private byte[] albumImageData;
 	
