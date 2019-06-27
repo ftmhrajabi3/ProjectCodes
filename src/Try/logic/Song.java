@@ -11,6 +11,10 @@ import main.UnsupportedTagException;
 
 public class Song implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String title;
 	private String artist;
 	private String album;

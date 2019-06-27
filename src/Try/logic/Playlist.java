@@ -5,6 +5,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class Playlist implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected boolean deletable;
 	
 	protected HashSet<Song> songs = new HashSet<Song>();

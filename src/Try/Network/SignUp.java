@@ -4,7 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -16,7 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import Try.UI.Main;
+import Try.logic.User;
 
 
 public class SignUp implements ActionListener {
@@ -73,15 +76,25 @@ public class SignUp implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		new Server().start();
-		if(notExists()) {
+		if(notExist()) {
 			frame.setVisible(false);
+			File file = new File("D:\\Jpotify\\SampelCode\\Client\\" + email.getText() + ".txt");
+			try {
+				file.createNewFile();
+				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
+				out.writeObject(new User(name.getText(), email.getText(), password.getText()));
+				out.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}else {
 			JOptionPane.showMessageDialog(new JFrame(), "This Email Already Exists");
 		}
 		
 	}
 	
-	private boolean notExists() {
+	private boolean notExist() {
 		boolean check = false;
 		try (Socket socket = new Socket("127.0.0.1", 444);
 				DataOutputStream dos = new DataOutputStream(socket.getOutputStream());

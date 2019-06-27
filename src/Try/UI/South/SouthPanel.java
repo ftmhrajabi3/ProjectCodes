@@ -4,13 +4,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
+import Try.logic.User;
+
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
 
 public class SouthPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Create the panel.
 	 */
@@ -32,7 +37,7 @@ public class SouthPanel extends JPanel {
 	
 	JPanel panel = new JPanel();
 	
-	public SouthPanel() {
+	public SouthPanel(User user) {
 		setBounds(0, 534, 1148, 124);
 		setLayout(null);
 		

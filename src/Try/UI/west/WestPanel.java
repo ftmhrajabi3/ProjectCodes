@@ -1,19 +1,23 @@
 package Try.UI.west;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JToggleButton;
 
+import Try.logic.User;
+
 public class WestPanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Create the panel.
 	 */
-	public WestPanel() {
+	public WestPanel(User user) {
 		setLayout(null);
 		setBounds(0, 34, 166, 500);
 		

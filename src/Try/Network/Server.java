@@ -35,6 +35,9 @@ public class Server extends Thread {
 				dos.writeBoolean(new ServerLoginCheck(dis.readUTF(), dis.readUTF()).checkUser());
 				dos.flush();
 				dos.close();
+				dis.close();
+				socket.close();
+				server.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -45,8 +48,10 @@ public class Server extends Thread {
 				dos.writeBoolean(new ServerSignUpCheck(dis.readUTF(), dis.readUTF(), dis.readUTF()).checkEmail());
 				dos.flush();
 				dos.close();
+				dis.close();
+				socket.close();
+				server.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;

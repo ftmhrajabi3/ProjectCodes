@@ -5,19 +5,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class Library implements Serializable {
-	private static Library library;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private HashSet<Song> songs = new HashSet<Song>();
-	
-	private Library() {
-		super();
-	}
-
-
-	public static Library getLibrary() {
-		if(library == null)
-			library = new Library();			
-		return library;
-	}
 	
 	public void addSong(Song s) {
 		songs.add(s);

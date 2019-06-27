@@ -6,7 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -19,6 +22,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Try.UI.Main;
+import Try.logic.User;
 
 
 public class Login implements ActionListener {
@@ -93,8 +97,13 @@ public class Login implements ActionListener {
 		new Server().start();
 		if(checkUserInfo()) {
 			frame.setVisible(false);
-			Main frame = new Main();
+			Main frame = new Main(getUser());
 			frame.setVisible(true);
+			Runtime.getRuntime().addShutdownHook(new Thread() {
+		        public void run(){
+		            saveInfo();
+		        }
+		    });
 		}
 		else {
 			JOptionPane.showMessageDialog(new JFrame(), "Wrong email or password");
@@ -123,5 +132,41 @@ public class Login implements ActionListener {
 			e.printStackTrace();
 		}
 		return check;
+	}
+	
+	private void saveInfo() {
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:\\Jpotify\\SampelCode\\Client\\" + email.getText() + ".txt")); 
+			User user = (User) ois.readObject();
+			user.updateInfo();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private User getUser() {
+		User user = null;
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:\\Jpotify\\SampelCode\\Client\\" + email.getText() + ".txt")); 
+			user = (User) ois.readObject();
+			ois.close();
+		}catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
 	}
 }

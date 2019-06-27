@@ -5,12 +5,19 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Try.logic.User;
+
 public class EastPanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Create the panel.
 	 */
-	public EastPanel() {
+	public EastPanel(User user) {
 		setLayout(null);
 		setBounds(982, 34, 166, 500);
 		

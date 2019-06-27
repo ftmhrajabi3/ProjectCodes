@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Try.logic.User;
+
 public class NorthPanel extends JPanel {
 
 	/**
@@ -16,27 +18,30 @@ public class NorthPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public NorthPanel() {
+	JTextField txtSongSearch = new JTextField();
+	JLabel lblSearch = new JLabel("Search");
+	JButton btnSearch = new JButton("Search");
+
+	public NorthPanel(User user) {
 		
 		setBounds(0, 0, 1140, 34);
 		setVisible(true);
 		setLayout(null);
 
-		JLabel lblSearch = new JLabel("Search");
 		lblSearch.setBounds(440, 9, 50, 13);
 		lblSearch.setIcon(new ImageIcon("D:\\Java Codes\\Project\\search.png"));
 		add(lblSearch);
 		
-		JTextField txtSongSearch = new JTextField();
 		txtSongSearch.setText("song search");
 		txtSongSearch.setBounds(491, 6, 96, 19);
 		add(txtSongSearch);
 		txtSongSearch.setColumns(10);
 		
-		JButton btnSearch = new JButton("Search");
 		btnSearch.setBounds(599, 5, 80, 21);
 		add(btnSearch);
 		
 	}
+	
+	
 
 }

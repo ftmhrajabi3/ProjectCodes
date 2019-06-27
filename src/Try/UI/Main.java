@@ -1,6 +1,5 @@
 package Try.UI;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -9,36 +8,28 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
-import Try.Network.Login;
 import Try.UI.East.EastPanel;
 import Try.UI.North.NorthPanel;
 import Try.UI.South.SouthPanel;
 import Try.UI.west.WestPanel;
+import Try.logic.User;
 
 public class Main extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
 	/**
 	 * Launch the application.
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					
-//					Main frame = new Main();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the frame.
 	 */
+	User user;
 	
 	JSeparator separator = new JSeparator();
 	JSeparator separator_1 = new JSeparator();
@@ -53,7 +44,8 @@ public class Main extends JFrame {
 	JMenuItem findFriend = new JMenuItem("Find Friend");
 	JMenuItem requests = new JMenuItem("Friend Requests");
 
-	public Main() {
+	public Main(User user) {
+		this.user = user;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1154, 707);
@@ -86,13 +78,14 @@ public class Main extends JFrame {
 	
 		menuBar.add(userMenu);
 		
+		userMenu.setText(user.getName());
 		userMenu.add(findFriend);
 		userMenu.add(requests);
 		
-		getContentPane().add(new SouthPanel());
-		getContentPane().add(new EastPanel());
-		getContentPane().add(new NorthPanel());
-		getContentPane().add(new WestPanel());
+		getContentPane().add(new SouthPanel(user));
+		getContentPane().add(new EastPanel(user));
+		getContentPane().add(new NorthPanel(user));
+		getContentPane().add(new WestPanel(user));
 		
 	}
 }
