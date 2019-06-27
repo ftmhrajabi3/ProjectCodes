@@ -34,5 +34,4 @@ public class AddSong implements ActionListener {
 			user.getLibrary().addSong(new Song(filechooser.getSelectedFile().getPath()));
 		}
 	}
-
 }
