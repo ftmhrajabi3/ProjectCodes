@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 
 import Try.logic.User;
 
@@ -20,7 +21,7 @@ public class NorthPanel extends JPanel {
 	 */
 	JTextField txtSongSearch = new JTextField();
 	JLabel lblSearch = new JLabel("Search");
-	JButton btnSearch = new JButton("Search");
+	JToggleButton btnSearch = new JToggleButton("Search");
 	SearchButton searchBtn;
 
 	public NorthPanel(User user) {
@@ -40,7 +41,7 @@ public class NorthPanel extends JPanel {
 		
 		btnSearch.setBounds(599, 5, 80, 21);
 		searchBtn = new SearchButton(this, user);
-		btnSearch.addActionListener(searchBtn);
+		btnSearch.addItemListener(searchBtn);
 		add(btnSearch);
 		
 	}

@@ -76,7 +76,7 @@ public class SignUp implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		new Server().start();
-		if(notExist()) {
+		if(notExist() && (email.getText() != "") && (password.getText() != "") && (name.getText() != "")) {
 			frame.setVisible(false);
 			File file = new File("D:\\Jpotify\\SampelCode\\Client\\" + email.getText() + ".txt");
 			try {
@@ -89,7 +89,7 @@ public class SignUp implements ActionListener {
 				e1.printStackTrace();
 			}
 		}else {
-			JOptionPane.showMessageDialog(new JFrame(), "This Email Already Exists");
+			JOptionPane.showMessageDialog(new JFrame(), "This Email Already Exists or You Have Left Some of The Fields Empty");
 		}
 		
 	}

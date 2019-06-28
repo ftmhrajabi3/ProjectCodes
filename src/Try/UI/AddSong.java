@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Try.logic.Song;
@@ -26,12 +25,12 @@ public class AddSong implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JFileChooser filechooser = new JFileChooser();
-		int i = filechooser.showOpenDialog(main);
-		FileFilter filter = new FileNameExtensionFilter("MP3 File", "mp3");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("MP3 File", "mp3");
 		filechooser.setFileFilter(filter);
+		int i = filechooser.showOpenDialog(main);
 		if(i == JFileChooser.APPROVE_OPTION) {
-			System.out.println(user.toString());
 			user.getLibrary().addSong(new Song(filechooser.getSelectedFile().getPath()));
+			System.out.println(new Song(filechooser.getSelectedFile().getPath()).getTitle());
 		}
 	}
 }

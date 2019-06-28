@@ -1,20 +1,19 @@
 package Try.UI.North;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import Try.UI.Center.CentralPanel;
-import Try.UI.Center.SongUI;
 import Try.logic.Song;
 import Try.logic.User;
 
-public class SearchButton implements ActionListener {
+public class SearchButton implements ItemListener {
 
 	NorthPanel np;
 	User user;
+	SearchBtnUI ui;
 	
 	public SearchButton(NorthPanel np, User user) {
 		this.np = np;
@@ -22,20 +21,6 @@ public class SearchButton implements ActionListener {
 		
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		Song song = findSong();
-		if(song == null)
-			JOptionPane.showMessageDialog(new JFrame(), "Not found");
-		else {
-			JFrame centralPanel = new JFrame();
-			centralPanel.setUndecorated(true);
-			centralPanel.setBounds(150, 34, 832, 34);
-			centralPanel.setVisible(true);
-			SongUI songUI = new SongUI(song);
-			centralPanel.add(songUI);
-		}
-	}
 	
 	public Song findSong() {
 		String name = np.txtSongSearch.getText();
@@ -46,6 +31,22 @@ public class SearchButton implements ActionListener {
 				return songs[i];
 		}
 		return null;		
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if(np.btnSearch.isSelected()) {
+			Song song = findSong();
+			if(song == null)
+				JOptionPane.showMessageDialog(new JFrame(), "Not found");
+			else {
+				ui = new SearchBtnUI(song);
+				ui.setVisible(true);
+			}
+		}else {
+			ui.setVisible(false);
+			System.out.println("not selected");
+		}
 	}
 
 }
