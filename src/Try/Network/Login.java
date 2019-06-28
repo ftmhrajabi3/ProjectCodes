@@ -135,20 +135,8 @@ public class Login implements ActionListener {
 	}
 	
 	private void saveInfo() {
-		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:\\Jpotify\\SampelCode\\Client\\" + email.getText() + ".txt")); 
-			User user = (User) ois.readObject();
-			user.updateInfo();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		getUser().updateInfo();
+		System.out.println(getUser().toString());
 	}
 	
 	private User getUser() {

@@ -1,11 +1,14 @@
 package Try.logic;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.Socket;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -85,6 +88,15 @@ public class User implements Serializable {
 	
 	
 	public void requestTo(User u) {
+		try(Socket socket =  new Socket("127.0.0.1", 444);
+				DataOutputStream dos = new DataOutputStream(socket.getOutputStream())) {
+			dos.writeUTF("requesting");
+			dos.flush();
+			dos.writeUTF(u.email);
+			dos.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -131,7 +143,10 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [name=" + name + ", email=" + email + ", password=" + password + ", library=" + library
+		String lib = "";
+		for(int i=0; i<library.getLibrarySongs().length ; i++)
+			lib += library.getLibrarySongs()[i].getTitle();
+		return "User [name=" + name + ", email=" + email + ", password=" + password + ", library=" + lib
 				+ ", playlists=" + playlists + ", share=" + share + ", friends=" + friends + ", requests=" + requests
 				+ "]";
 	}

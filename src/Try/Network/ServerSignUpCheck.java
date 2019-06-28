@@ -44,7 +44,6 @@ public class ServerSignUpCheck {
 			file = new File("D:\\Jpotify\\SampelCode\\Server\\shared" + email);
 			file.mkdir();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
