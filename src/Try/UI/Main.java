@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import Try.UI.Center.CentralPanel;
 import Try.UI.East.EastPanel;
 import Try.UI.North.NorthPanel;
 import Try.UI.South.SouthPanel;
@@ -98,6 +100,8 @@ public class Main extends JFrame {
 		getContentPane().add(new SouthPanel(user));
 		getContentPane().add(new EastPanel(user));
 		getContentPane().add(new NorthPanel(user));
-		getContentPane().add(new WestPanel(user));
+		CentralPanel center = new CentralPanel(user, user.getLibrary().getLibrarySongs());
+		getContentPane().add(center);
+		getContentPane().add(new WestPanel(user, center));
 	}
 }

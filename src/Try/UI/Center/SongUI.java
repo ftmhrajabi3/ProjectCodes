@@ -5,9 +5,17 @@ import javax.swing.JPanel;
 import Try.logic.Song;
 
 import javax.swing.JLabel;
-import javax.swing.Icon;
+
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+
 import javax.swing.JButton;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class SongUI extends JPanel {
 
@@ -15,7 +23,6 @@ public class SongUI extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JLabel lblPicture = new JLabel("Picture");
 	JLabel lblTitle = new JLabel("title");
 	JLabel lblArtist = new JLabel("artist");
 	JLabel lblAlbum = new JLabel("Album");
@@ -26,29 +33,40 @@ public class SongUI extends JPanel {
 	 * Create the panel.
 	 */
 	public SongUI(Song song) {
+		setBackground(Color.LIGHT_GRAY);
 		setLayout(null);
+		ImageIcon img = new ImageIcon("D:\\Jpotify\\SampelCode\\SongPic\\" + song.getTitle() + ".jpeg");
+		img = new ImageIcon(getScaledImage(img.getImage(), 70, 75));
 		
-		lblPicture.setBounds(10, 10, 65, 75);
-		lblPicture.setIcon(new ImageIcon("D:\\Jpotify\\SampelCode\\SongPic\\" + song.getTitle() + ".jpeg"));
-		add(lblPicture);
-		
-		lblTitle.setBounds(131, 10, 121, 13);
+		lblTitle.setBounds(131, 10, 195, 13);
 		lblTitle.setText(song.getTitle());
 		add(lblTitle);
 		
-		lblArtist.setBounds(131, 33, 101, 13);
+		lblArtist.setBounds(131, 33, 195, 13);
 		lblArtist.setText(song.getArtist());
 		add(lblArtist);
 		
-		lblAlbum.setBounds(131, 56, 46, 13);
+		lblAlbum.setBounds(131, 56, 238, 13);
 		lblAlbum.setText(song.getAlbum());
 		add(lblAlbum);
+		btnPlay.setBackground(Color.BLACK);
 		
-		btnPlay.setBounds(737, 30, 85, 21);
+		btnPlay.setBounds(10, 10, 65, 75);
+		btnPlay.setIcon(img);
 		add(btnPlay);
 		
-		btnAddToPlaylist.setBounds(571, 30, 148, 21);
+		btnAddToPlaylist.setBounds(645, 29, 148, 21);
 		add(btnAddToPlaylist);
-
 	}
+	
+    private Image getScaledImage(Image srcImg, int w, int h){
+        BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = resizedImg.createGraphics();
+
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(srcImg, 0, 0, w, h, null);
+        g2.dispose();
+
+        return resizedImg;
+    }
 }
