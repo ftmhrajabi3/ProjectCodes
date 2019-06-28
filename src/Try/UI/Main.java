@@ -50,6 +50,8 @@ public class Main extends JFrame {
 	JMenuItem requests = new JMenuItem("Friend Requests");
 	JPanel panel;
 
+	CentralPanel center;
+
 	public Main(User user) {
 		this.user = user;
 		setResizable(false);
@@ -97,11 +99,11 @@ public class Main extends JFrame {
 		userMenu.add(findFriend);
 		userMenu.add(requests);
 		
+		center = new CentralPanel(user, user.getLibrary().getLibrarySongs());
 		getContentPane().add(new SouthPanel(user));
 		getContentPane().add(new EastPanel(user));
-		getContentPane().add(new NorthPanel(user));
-		CentralPanel center = new CentralPanel(user, user.getLibrary().getLibrarySongs());
-		getContentPane().add(center);
+		getContentPane().add(new NorthPanel(user, center));
 		getContentPane().add(new WestPanel(user, center));
+		getContentPane().add(center);
 	}
 }

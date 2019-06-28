@@ -15,7 +15,7 @@ public class CentralPanel extends JPanel {
 	User user;
     Song[] songs;
 	
-    public CentralPanel(User user, Song[] songs) {
+    public CentralPanel(User user, Song...songs) {
         super();
         setVisible(true);
         setBackground(Color.LIGHT_GRAY);
@@ -31,7 +31,7 @@ public class CentralPanel extends JPanel {
         }
     }
 
-	public void setSongs(Song[] songs) {
+	public void setSongs(Song...songs) {
 		this.songs = songs;
 		for(int i=0 ; i < songs.length ; i++) {
         	JPanel panel = new SongUI(songs[i]);
