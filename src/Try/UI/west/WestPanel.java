@@ -13,7 +13,9 @@ public class WestPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	JScrollBar scrollBar = new JScrollBar();
+	JButton btnHome = new JButton("Home");
+	JButton btnLibrary = new JButton("Library");
 	/**
 	 * Create the panel.
 	 */
@@ -21,15 +23,13 @@ public class WestPanel extends JPanel {
 		setLayout(null);
 		setBounds(0, 34, 166, 500);
 		
-		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(154, 0, 10, 500);
 		add(scrollBar);
 		
-		JButton btnHome = new JButton("Home");
 		btnHome.setBounds(9, 10, 125, 29);
 		add(btnHome);
+		btnHome.addActionListener(new HomeBtn(this, user));
 		
-		JButton btnLibrary = new JButton("Library");
 		btnLibrary.setBounds(9, 49, 125, 29);
 		add(btnLibrary);
 		
@@ -40,8 +40,8 @@ public class WestPanel extends JPanel {
 		JToggleButton tglbtnPlaylist = new JToggleButton("Playlist");
 		tglbtnPlaylist.setBounds(9, 124, 125, 29);
 		add(tglbtnPlaylist);
-
-
 	}
+	
+	
 
 }

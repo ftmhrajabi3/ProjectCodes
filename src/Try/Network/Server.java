@@ -55,6 +55,9 @@ public class Server extends Thread {
 				e.printStackTrace();
 			}
 			break;
+		case "requesting":
+/////////////////////
+			break;
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + input);
 		}

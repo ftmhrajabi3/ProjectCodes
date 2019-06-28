@@ -46,6 +46,7 @@ public class Main extends JFrame {
 	JMenu userMenu = new JMenu("User Info");
 	JMenuItem findFriend = new JMenuItem("Find Friend");
 	JMenuItem requests = new JMenuItem("Friend Requests");
+	JPanel panel;
 
 	public Main(User user) {
 		this.user = user;
@@ -98,6 +99,5 @@ public class Main extends JFrame {
 		getContentPane().add(new EastPanel(user));
 		getContentPane().add(new NorthPanel(user));
 		getContentPane().add(new WestPanel(user));
-		
 	}
 }

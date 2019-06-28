@@ -12,6 +12,8 @@ import java.net.Socket;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import Try.Network.Server;
+
 public class User implements Serializable {
 	/**
 	 * 
@@ -88,6 +90,7 @@ public class User implements Serializable {
 	
 	
 	public void requestTo(User u) {
+		new Server().start();
 		try(Socket socket =  new Socket("127.0.0.1", 444);
 				DataOutputStream dos = new DataOutputStream(socket.getOutputStream())) {
 			dos.writeUTF("requesting");
