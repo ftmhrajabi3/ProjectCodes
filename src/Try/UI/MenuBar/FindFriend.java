@@ -25,8 +25,12 @@ public class FindFriend extends JFrame {
 	 * Create the frame.
 	 */
 	public FindFriend(User user) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		setTitle("Find Friend");
+		setVisible(true);
+		
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -53,6 +57,7 @@ public class FindFriend extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("requesting to " + textField.getText());
 				user.requestTo(textField.getText());
 			}
 		});

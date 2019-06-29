@@ -20,16 +20,19 @@ public class ServerGetRequests {
 	public ServerGetRequests(String email) {
 		super();
 		this.email = email;
-		File file = new File("D:\\Jpotify\\SampelCode\\Server\\"+ email + "requests.txt");
+		File file = new File("D:\\Jpotify\\SampelCode\\Server\\" + email + "requsts.txt");
 		if(file.exists()) {
 
+			System.out.println("Server: " + email + " exits");
 			try(FileReader fr = new FileReader(file);
-					BufferedReader br = new BufferedReader(fr);) {
+					BufferedReader br = new BufferedReader(fr)) {
 				
 				String temp;
-				while((temp = br.readLine()) != null)
+				while((temp = br.readLine()) != null) {
+					System.out.println("Server: request from: " + temp);
 					requests.add(getUser(temp));
-			
+					
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -39,14 +42,6 @@ public class ServerGetRequests {
 	
 	
 	public HashSet<User> getRequests() {
-//		User[] allRequests = new User[requests.size()];
-//		int i = 0;
-//		Iterator<User> it = requests.iterator(); 
-//        while (it.hasNext()) {
-//        	allRequests[i] = it.next();
-//        	i++;
-//        }
-//        return allRequests;
 		return requests;
 	}
 	
@@ -54,8 +49,9 @@ public class ServerGetRequests {
 	private User getUser(String email) {
 		User user = null;
 		try {
-			if(new File("D:\\Jpotify\\SampelCode\\Client\\" + email + ".txt").exists()) {
-				ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:\\Jpotify\\SampelCode\\Client\\" + email + ".txt")); 
+			if(new File("D:\\Jpotify\\SampelCode\\Server\\" + email + ".txt").exists()) {
+				System.out.println("Server:" + email + "file found");
+				ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:\\Jpotify\\SampelCode\\Server\\" + email + ".txt")); 
 				user = (User) ois.readObject();
 				ois.close();				
 			}
@@ -69,6 +65,8 @@ public class ServerGetRequests {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		if(user != null)
+			System.out.println("Server:" + email + "found");
 		return user;
 	}
 

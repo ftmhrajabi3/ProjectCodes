@@ -28,6 +28,7 @@ public class Server extends Thread {
 			server = new ServerSocket(444);
 			socket = server.accept();
 			dis = new DataInputStream(socket.getInputStream());
+			System.out.println("server is awake");
 			requests((String)dis.readUTF());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -65,16 +66,23 @@ public class Server extends Thread {
 			break;
 		case "requesting to":
 			try {
-				new ServerRequesting(dis.readUTF());
+				String requestTo = dis.readUTF();
+				System.out.println("server: requesting to " + requestTo);
+				String requestFrom = dis.readUTF();
+				new ServerRequesting(requestTo, requestFrom);
 				dis.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			break;
 		case "get requests":
+			System.out.print("Server: looking for requests of ");
 			try (ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream())){
-				HashSet<User> requests = new ServerGetRequests(dis.readUTF()).getRequests();
+				String requestsOf = dis.readUTF();
+				System.out.println(requestsOf);
+				HashSet<User> requests = new ServerGetRequests(requestsOf).getRequests();
 				out.writeObject(requests);
+				System.out.println("Server: done");
 				out.flush();
 			} catch (IOException e) {
 				e.printStackTrace();

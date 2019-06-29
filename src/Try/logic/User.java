@@ -91,15 +91,19 @@ public class User implements Serializable {
 	
 	public void requestTo(String email) {
 		new Server().start();
+		System.out.println("in user, request to  " + email);
 		try(Socket socket =  new Socket("127.0.0.1", 444);
 				DataOutputStream dos = new DataOutputStream(socket.getOutputStream())) {
 			dos.writeUTF("requesting to");
 			dos.flush();
 			dos.writeUTF(email);
 			dos.flush();
+			dos.writeUTF(this.email);
+			dos.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("in user, done");
 	}
 	
 	
@@ -111,20 +115,26 @@ public class User implements Serializable {
 	
 	public void getRequests() {
 		new Server().start();
+		System.out.println("in user, looking for requests of " + email);
 		try(Socket socket =  new Socket("127.0.0.1", 444);
-				DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-				ObjectInputStream ois = new ObjectInputStream(socket.getInputStream())) {
+				DataOutputStream dos = new DataOutputStream(socket.getOutputStream())) {
 			dos.writeUTF("get requests");
 			dos.flush();
-			dos.writeUTF(getEmail());
+			dos.writeUTF(email);
 			dos.flush();
+			ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 			HashSet<User> readObject = (HashSet<User>) ois.readObject();
 			requests = readObject;
+			User[] all = requests();
+			for(int i=0 ; i<all.length ; i++)
+				System.out.println("in user, got request of : " + all[i]);
+			ois.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		System.out.println("in user, done");
 	}
 	
 	

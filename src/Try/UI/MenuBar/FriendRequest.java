@@ -4,47 +4,80 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Try.logic.User;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.SpringLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.Color;
 
 
-public class FriendRequest extends JFrame {
+public class FriendRequest extends JFrame implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
+	JLabel lblEmail = new JLabel("Email");
+	JPanel panel = new JPanel();
+	JButton btnAccept = new JButton("Accept");
 
 	/**
 	 * Create the frame.
 	 */
-	public FriendRequest() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public FriendRequest(User user) {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setVisible(true);		
 		setBounds(100, 100, 450, 300);
+		setTitle("Friend Requests");
+		
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		SpringLayout sl_contentPane = new SpringLayout();
-		contentPane.setLayout(sl_contentPane);
+		contentPane.setLayout(null);
 		
-		JLabel lblEmail = new JLabel("Email");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblEmail, 12, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblEmail, 118, SpringLayout.WEST, contentPane);
+		lblEmail.setBounds(69, 16, 30, 16);
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		contentPane.add(lblEmail);
 		
 		textField = new JTextField();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, textField, 11, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, textField, 153, SpringLayout.WEST, contentPane);
+		textField.setBounds(109, 16, 140, 19);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		JButton btnAccept = new JButton("Accept");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, btnAccept, 10, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnAccept, 254, SpringLayout.WEST, contentPane);
+		btnAccept.setBounds(259, 15, 89, 21);
 		contentPane.add(btnAccept);
 		
+		panel.setBackground(Color.PINK);
+		panel.setBounds(69, 58, 279, 170);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		System.out.println("in friend request, going throw requests");
+		user.getRequests();
+		System.out.println("in friend request, looking for requests");
+		for(int i=0 ; i<user.requests().length ; i++) {
+			JLabel l = new JLabel(user.requests()[i].getEmail());
+			l.setSize(40, 20);
+			l.setLocation(5, 5 + (i)*20);
+			panel.add(l);
+			System.out.println("in friend request, request frome : " + user.requests()[i].getEmail());
+		}
 		
 		
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+	}
+	
+	
+	
 }

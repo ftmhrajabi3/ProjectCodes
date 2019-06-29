@@ -61,9 +61,8 @@ public class WestPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnHome) {
 			center.setVisible(false);
-			Song[] songs = {new Song("C:\\Users\\Fatemeh Rajabi\\Music\\Masih.mp3")};
 			center.removeAll();
-			center.setSongs(songs);
+//			center.setSongs(songs);
 			center.setVisible(true);
 		}
 	}

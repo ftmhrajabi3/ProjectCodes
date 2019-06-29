@@ -16,6 +16,8 @@ import Try.UI.Center.CentralPanel;
 import Try.UI.East.EastPanel;
 import Try.UI.MenuBar.AddPlaylist;
 import Try.UI.MenuBar.AddSong;
+import Try.UI.MenuBar.FindFriend;
+import Try.UI.MenuBar.FriendRequest;
 import Try.UI.North.NorthPanel;
 import Try.UI.South.SouthPanel;
 import Try.UI.west.WestPanel;
@@ -99,8 +101,23 @@ public class Main extends JFrame {
 		
 		userMenu.setText(user.getName());
 		userMenu.add(findFriend);
-		userMenu.add(requests);
+		findFriend.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new FindFriend(user);
+				
+			}
+		});
 		
+		userMenu.add(requests);
+		requests.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new FriendRequest(user);
+			}
+		});
 		center = new CentralPanel(user, user.getLibrary().getLibrarySongs());
 		getContentPane().add(new SouthPanel(user));
 		getContentPane().add(new EastPanel(user));
