@@ -12,5 +12,4 @@ public class SharedPlayList extends Playlist implements Serializable {
 	public SharedPlayList(String name, User user) {
 		super(false, "Shared Playlist", user);
 	}
-	
 }

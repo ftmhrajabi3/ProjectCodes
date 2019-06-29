@@ -1,10 +1,11 @@
 package Try.UI.South;
-import javax.swing.JButton;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
 import Try.logic.User;
+//import jaco.mp3.player.MP3Player;
 
 import java.awt.Font;
 import java.awt.Color;
@@ -20,10 +21,6 @@ public class SouthPanel extends JPanel {
 	 * Create the panel.
 	 */
 	
-	JButton playBtn = new JButton("Play");
-	JButton nextBtn = new JButton("Next");
-	JButton pauseBtn = new JButton("Pause");
-	JButton previousBtn = new JButton("Previous");
 	
 	JLabel timer = new JLabel("00:00:00");
 	JLabel timeLeft = new JLabel("00:00:00");
@@ -41,21 +38,7 @@ public class SouthPanel extends JPanel {
 		setBounds(0, 534, 1148, 124);
 		setLayout(null);
 		
-		playBtn.setLocation(588, 10);
-		playBtn.setSize(80, 21);
-		add(playBtn);
-		
-		nextBtn.setLocation(678, 10);
-		nextBtn.setSize(80, 21);
-		add(nextBtn);
-		
-		
-		pauseBtn.setSize(80, 21);
-		pauseBtn.setLocation(499, 10);
-		add(pauseBtn);
-		
-		previousBtn.setBounds(399, 10, 90, 21);
-		add(previousBtn);
+//		MP3Player player = new MP3Player();
 
 		timer.setSize(50, 21);
 		timer.setLocation(323, 40);

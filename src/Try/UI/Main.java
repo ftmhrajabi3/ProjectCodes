@@ -14,6 +14,8 @@ import javax.swing.border.EmptyBorder;
 
 import Try.UI.Center.CentralPanel;
 import Try.UI.East.EastPanel;
+import Try.UI.MenuBar.AddPlaylist;
+import Try.UI.MenuBar.AddSong;
 import Try.UI.North.NorthPanel;
 import Try.UI.South.SouthPanel;
 import Try.UI.west.WestPanel;

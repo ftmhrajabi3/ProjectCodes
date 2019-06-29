@@ -8,5 +8,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Fatemeh Rajabi/Downloads/jl1.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Fatemeh Rajabi/Downloads/mp3agic.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fatemeh Rajabi/Downloads/jaco-mp3-player-0.9.3.jar" sourcepath="C:/Users/Fatemeh Rajabi/Downloads/jaco-mp3-player-0.9.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

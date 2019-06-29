@@ -1,4 +1,4 @@
-package Try.UI;
+package Try.UI.MenuBar;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

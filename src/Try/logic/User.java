@@ -1,11 +1,11 @@
 package Try.logic;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
@@ -89,18 +89,17 @@ public class User implements Serializable {
 	}
 	
 	
-	public void requestTo(User u) {
+	public void requestTo(String email) {
 		new Server().start();
 		try(Socket socket =  new Socket("127.0.0.1", 444);
 				DataOutputStream dos = new DataOutputStream(socket.getOutputStream())) {
-			dos.writeUTF("requesting");
+			dos.writeUTF("requesting to");
 			dos.flush();
-			dos.writeUTF(u.email);
+			dos.writeUTF(email);
 			dos.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	
@@ -108,6 +107,24 @@ public class User implements Serializable {
 		requests.remove(u);
 		friends.add(u);
 		updateInfo();
+	}
+	
+	public void getRequests() {
+		new Server().start();
+		try(Socket socket =  new Socket("127.0.0.1", 444);
+				DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+				ObjectInputStream ois = new ObjectInputStream(socket.getInputStream())) {
+			dos.writeUTF("get requests");
+			dos.flush();
+			dos.writeUTF(getEmail());
+			dos.flush();
+			HashSet<User> readObject = (HashSet<User>) ois.readObject();
+			requests = readObject;
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

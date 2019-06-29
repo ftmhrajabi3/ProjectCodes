@@ -1,4 +1,4 @@
-package Try.UI;
+package Try.UI.MenuBar;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -44,7 +44,7 @@ public class AddPlaylist implements ActionListener {
 	private void initialize() {
 		frmAddPlaylist.setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\Java Codes\\Project\\Spotify.jpg"));
 		frmAddPlaylist.setTitle("Add PlayList");
-		frmAddPlaylist.setBounds(100, 100, 497, 505);
+		frmAddPlaylist.setBounds(100, 100, 497, 294);
 		frmAddPlaylist.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmAddPlaylist.setVisible(true);
 		frmAddPlaylist.getContentPane().setLayout(null);
