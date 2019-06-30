@@ -13,7 +13,7 @@ public class CentralPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	User user;
-    Song[] songs;
+    static Song[] songs;
 	
     public CentralPanel(User user, Song...songs) {
         super();
@@ -39,4 +39,10 @@ public class CentralPanel extends JPanel {
         	add(panel);
 		}
 	}
+
+	public static Song[] getSongs() {
+		return songs;
+	}
+	
+	
 }

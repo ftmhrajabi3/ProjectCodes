@@ -2,7 +2,9 @@ package Try.UI.Center;
 
 import javax.swing.JPanel;
 
+import Try.UI.South.SouthPanel;
 import Try.logic.Song;
+import jaco.mp3.player.MP3Player;
 
 import javax.swing.JLabel;
 
@@ -10,7 +12,10 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -28,6 +33,7 @@ public class SongUI extends JPanel {
 	JLabel lblAlbum = new JLabel("Album");
 	JButton btnPlay = new JButton("Play");
 	JButton btnAddToPlaylist = new JButton("Add to playlist");
+
 
 	/**
 	 * Create the panel.
@@ -53,11 +59,20 @@ public class SongUI extends JPanel {
 		
 		btnPlay.setBounds(10, 10, 65, 75);
 		btnPlay.setIcon(img);
+		btnPlay.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SouthPanel.setSong(song);
+				
+			}
+		});
 		add(btnPlay);
 		
 		btnAddToPlaylist.setBounds(645, 29, 148, 21);
 		add(btnAddToPlaylist);
 	}
+	
 	
     private Image getScaledImage(Image srcImg, int w, int h){
         BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);

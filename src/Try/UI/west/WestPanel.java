@@ -30,6 +30,8 @@ public class WestPanel extends JPanel implements ActionListener {
 	User user;
 	
 	CentralPanel center;
+
+	private Song[] songs;
 	
 	/**
 	 * Create the panel.
@@ -61,8 +63,9 @@ public class WestPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnHome) {
 			center.setVisible(false);
+			songs = user.getLibrary().getLibrarySongs();
 			center.removeAll();
-//			center.setSongs(songs);
+			center.setSongs(songs);
 			center.setVisible(true);
 		}
 	}

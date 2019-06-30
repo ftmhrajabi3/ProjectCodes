@@ -30,6 +30,8 @@ public class Song implements Serializable {
 	
 	private String mimeType;
 	
+	private long totalTime;
+	
 	public Song(String path) {
 		super();
 		this.path = path;
@@ -39,6 +41,7 @@ public class Song implements Serializable {
 	private void metadata() {
 		try {
 			mp3file = new Mp3File(path);
+			totalTime = mp3file.getLengthInMilliseconds();
 		} catch (UnsupportedTagException | InvalidDataException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,6 +65,10 @@ public class Song implements Serializable {
 	
 	}
 	
+	public long getTotalTimeSecond() {
+		return totalTime;
+	}
+
 	public void getAlbumImageData() {
 		try {
 			if (mp3file.hasId3v2Tag()) {
