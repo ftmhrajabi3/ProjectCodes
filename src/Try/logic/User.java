@@ -29,6 +29,8 @@ public class User implements Serializable {
 	private HashSet<User> requests = new HashSet<User>();
 	
 	
+
+
 	public User(String name, String email, String password) {
 		super();
 		this.name = name;
@@ -36,6 +38,10 @@ public class User implements Serializable {
 		this.password = password;
 		library = new Library(this);
 		updateInfo();
+	}
+
+	public void setFriends(HashSet<User> friends) {
+		this.friends = friends;
 	}
 
 

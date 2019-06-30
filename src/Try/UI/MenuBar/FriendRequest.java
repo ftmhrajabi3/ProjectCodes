@@ -23,14 +23,21 @@ public class FriendRequest extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
+	
 	JLabel lblEmail = new JLabel("Email");
+	
 	JPanel panel = new JPanel();
+	
 	JButton btnAccept = new JButton("Accept");
 
+	User user;
 	/**
 	 * Create the frame.
 	 */
 	public FriendRequest(User user) {
+		
+		this.user = user;
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);		
 		setBounds(100, 100, 450, 300);
@@ -52,6 +59,7 @@ public class FriendRequest extends JFrame implements ActionListener {
 		textField.setColumns(10);
 		
 		btnAccept.setBounds(259, 15, 89, 21);
+		btnAccept.addActionListener(this);
 		contentPane.add(btnAccept);
 		
 		panel.setBackground(Color.PINK);
@@ -59,7 +67,6 @@ public class FriendRequest extends JFrame implements ActionListener {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		System.out.println("in friend request, going throw requests");
 		user.getRequests();
 		System.out.println("in friend request, looking for requests");
 		for(int i=0 ; i<user.requests().length ; i++) {
@@ -75,7 +82,8 @@ public class FriendRequest extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		System.out.println(getClass() + " : " + "you pushed accept");
+		new AcceptRequest(user, textField.getText());
 	}
 	
 	

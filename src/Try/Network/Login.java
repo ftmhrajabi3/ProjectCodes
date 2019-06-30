@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.HashSet;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -97,7 +98,8 @@ public class Login implements ActionListener {
 		new Server().start();
 		if(checkUserInfo()) {
 			frame.setVisible(false);
-			Main frame = new Main(getUser());
+			Main frame = new Main(getUser(email.getText()));
+			newFriends();
 			frame.setVisible(true);
 			Runtime.getRuntime().addShutdownHook(new Thread() {
 		        public void run(){
@@ -135,14 +137,14 @@ public class Login implements ActionListener {
 	}
 	
 	private void saveInfo() {
-		getUser().updateInfo();
-		System.out.println(getUser().toString());
+		getUser(email.getText()).updateInfo();
+		System.out.println(getUser(email.getText()).toString());
 	}
 	
-	private User getUser() {
+	private User getUser(String email) {
 		User user = null;
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:\\Jpotify\\SampelCode\\Client\\" + email.getText() + ".txt")); 
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:\\Jpotify\\SampelCode\\Client\\" + email + ".txt")); 
 			user = (User) ois.readObject();
 			ois.close();
 		}catch (FileNotFoundException e) {
@@ -156,5 +158,30 @@ public class Login implements ActionListener {
 			e.printStackTrace();
 		}
 		return user;
+	}
+	
+	
+	private void newFriends() {
+		new Server().start();
+		try(Socket socket =  new Socket("127.0.0.1", 444);
+				DataOutputStream dos = new DataOutputStream(socket.getOutputStream())) {
+			dos.writeUTF("getting new friends");
+			dos.flush();
+			dos.writeUTF(email.getText());
+			dos.flush();
+			ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+			HashSet<User> friends = (HashSet<User>) ois.readObject();
+			User u = getUser(email.getText());
+			u.setFriends(friends);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

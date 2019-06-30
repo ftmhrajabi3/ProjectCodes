@@ -41,6 +41,8 @@ public class ServerSignUpCheck {
 			out.close();
 			file = new File("D:\\Jpotify\\SampelCode\\Server\\" + email + "requsts.txt");
 			file.createNewFile();
+			file = new File("D:\\Jpotify\\SampelCode\\Server\\" + email + "acceptedRequsts.txt");
+			file.createNewFile();
 			file = new File("D:\\Jpotify\\SampelCode\\Server\\shared" + email);
 			file.mkdir();
 		} catch (IOException e) {

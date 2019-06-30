@@ -8,43 +8,41 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.HashSet;
-import java.util.Iterator;
 
 import Try.logic.User;
 
-public class ServerGetRequests {
+public class GettingFriends {
 
-	String email;
-	HashSet<User> requests = new HashSet<>();
-
-	public ServerGetRequests(String email, String path) {
+	HashSet<User> newFriends = new HashSet<User>();
+	
+	public GettingFriends(String email) {
 		super();
-		System.out.println(getClass() + " : " + email);
-		this.email = email;
-		File file = new File("D:\\Jpotify\\SampelCode\\Server\\" + email + path);
-		if(file.exists()) {
-			System.out.println(getClass() + " : " + email + "exists");
-			System.out.println("Server: " + email + " exits");
-			try(FileReader fr = new FileReader(file);
-					BufferedReader br = new BufferedReader(fr)) {
-				
-				String temp;
-				while((temp = br.readLine()) != null) {
-					System.out.println("Server: request from: " + temp);
-					requests.add(getUser(temp));
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		
+		File file = new File("D:\\Jpotify\\SampelCode\\Server\\" + email + "acceptedRequsts.txt");
+		
+		try(FileReader fr = new FileReader(file);
+				BufferedReader br = new BufferedReader(fr)) {
+			String temp;
+			while((temp = br.readLine()) != null) {
+				System.out.println("Server: request from: " + temp);
+				newFriends.add(getUser(temp));
 			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-		System.out.println(getClass() + " : " + "Done!!");
 	}
+
 	
 	
-	public HashSet<User> getRequests() {
-		return requests;
+	public HashSet<User> getFriends() {
+		return newFriends;
 	}
+	
 	
 	
 	private User getUser(String email) {
